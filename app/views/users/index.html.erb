@@ -1,2 +1,43 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+ <div class="">
+          <h2 class="">Guest List</h2>
+    
+          <div class="">
+            <table class="">
+              <tbody>
+                <th class="">Name</th>
+                <th class="">Status</th>
+                <th class="">Action</th>
+
+                <% @users.reject { |user| user == Event.find(params[:event_id]).creator }.each do |user| %>
+                  <% invitation = Invitation.find_by(event_id: params[:event_id], user_id: user.id) %>
+                  <tr>
+                    <td class="">
+                      <%= user.username %>
+                    </td>
+                    <% unless invitation.nil? || invitation.status.nil? %>
+                      <td class="">
+                        <span class=""><%= invitation.status %><span>
+                      </td>
+                    <% else %>
+                      <td></td>
+                    <% end %>
+                    <% if invitation.nil? %>
+                      <td class="">
+                        <%= button_to "Invite", invitations_path(event_id: params[:event_id], user_id: user.id), class: "button is-primary is-small" %>
+                      </td>
+                    <% else %>
+                      <td class="">
+                        <%= button_to "Cancel Invitation", invitation_path(id: invitation.id, event_id: params[:event_id]), method: :delete, class: "button is-danger is-small" %>
+                      </td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+
+          <br/>
+
+          <%= link_to 'Back to Event Details', event_path(id: params[:event_id]), class: "button is-fullwidth" %>
+
+        </div>
