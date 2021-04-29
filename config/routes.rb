@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'sessions/index'
   get 'invitations/sessions'
   get 'users/index'
   resources :events
