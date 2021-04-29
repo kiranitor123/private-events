@@ -11,6 +11,25 @@
   </head>
 
   <body>
+    <p class="control">
+      <%= link_to "Create event", new_event_path, class: "button is-white" %>
+    </p>
+    <% if current_user %>
+      <p class="control">
+        <%= link_to current_user.name, user_path(current_user), class: "button is-white" %>
+      </p>
+      <p>
+        <%= link_to "Logout", logout_path, class: "button is-white" %>
+      </p>
+    <% else %>
+    <p class="control">
+      <%= link_to 'Log In', login_path, class: "button is-white" %>
+    </p>
+		<p class="control">
+      <%= link_to 'Sign Up', signup_path, class: "button is-white" %>
+    </p>
+              <% end %>
+
     <%= yield %>
   </body>
 </html>

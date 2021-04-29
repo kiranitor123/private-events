@@ -1,0 +1,17 @@
+<div class="">
+        <h2 class="">Log In</h2>
+        <%= form_with url: sessions_path, local: true do |form| %>
+          <div class="field">
+            <div class="control">
+              <%= form.label :username, class: "label" %>
+              <%= form.text_field :username, class: "input", autofocus: true %>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <%= form.submit "Log in", class: "" %>
+            </div>
+          </div>
+  <% end %>
+</div>
