@@ -1,7 +1,9 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class InvitationsControllerTest < ActionDispatch::IntegrationTest
-  test "should get sessions" do
+  test 'should get sessions' do
     get invitations_sessions_url
     assert_response :success
   end

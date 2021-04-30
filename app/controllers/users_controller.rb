@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
-  before_action :require_login, except: [:new, :create]
+  before_action :require_login, except: %i[new create]
 
   def index
     @users = User.all
@@ -20,8 +22,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  private 
-  
+  private
+
   def user_params
     params.require(:user).permit(:username)
   end

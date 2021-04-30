@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EventsController < ApplicationController
   before_action :require_login, except: [:index]
 
@@ -21,22 +23,23 @@ class EventsController < ApplicationController
     @event = current_user.events.build(event_params)
 
     if @event.save
-      flash[:success] = "Event created!"
+      flash[:success] = 'Event created!'
       redirect_to @event
     else
-      flash[:alert] = "Some error"
+      flash[:alert] = 'Some error'
       render 'new'
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def event_params
-      params.require(:event).permit(:title, :description, :date, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def event_params
+    params.require(:event).permit(:title, :description, :date, :user_id)
+  end
 end

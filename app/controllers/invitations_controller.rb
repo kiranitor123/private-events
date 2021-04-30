@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InvitationsController < ApplicationController
   before_action :require_login
 
@@ -7,7 +9,7 @@ class InvitationsController < ApplicationController
 
     if invitation.save
       invitation.invited!
-      flash[:notice] = "Invitation sent!"
+      flash[:notice] = 'Invitation sent!'
       redirect_to users_path(event_id: event.id)
     else
       flash[:alert] = 'Error'
@@ -20,11 +22,11 @@ class InvitationsController < ApplicationController
     invitation = Invitation.find(params[:id])
     if current_user == event.creator
       invitation.destroy
-      flash[:notice] = "The invitation is cancelled!"
+      flash[:notice] = 'The invitation is cancelled!'
     else
       invitation.invited!
       invitation.save
-      flash[:notice] = "You have dropped the invitation !"
+      flash[:notice] = 'You have dropped the invitation !'
     end
 
     redirect_to users_path(event_id: event.id, id: invitation.id)
@@ -34,16 +36,14 @@ class InvitationsController < ApplicationController
     @event = Event.find(params[:event_id])
     @invitation = Invitation.find_by(event_id: params[:event_id], user_id: current_user.id)
 
-    if @invitation && @invitation.invited?
+    if @invitation&.invited?
       @invitation.accepted!
-      
-      flash[:notice] = "Thank you for signing up"
+
+      flash[:notice] = 'Thank you for signing up'
     else
       flash[:alert] = 'Your name is not on the invitation list'
     end
 
     redirect_to event_path(@event)
   end
-
-
 end

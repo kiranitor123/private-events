@@ -1,20 +1,18 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
 # Private-Events
-This app mimicks the main features of Eventbrite and is thus an exercise in the main concepts of Associations in Rails.
+This app mimicks the main features of Eventbrite and so is an exercise in the main concepts of Associations in Rails.
 
 
 ![Captura de Pantalla 2021-04-30 a la(s) 10 23 20](https://user-images.githubusercontent.com/68709712/116731246-4efc0c00-a99e-11eb-8719-40f901b6c2f6.png)
-)
 
 The front end ( `http://localhost:3000/` ) displays the list of all events, categorized by upcoming and past ones. Only signed-in users can register to events. Links in the nav bar allow users to Sign Up, Log In, view all posted Events and Logout if signed in. When Logged-in, a user can access private pages to create events and to view events. Every logged-in user can invite other users to an event. The invited user has the option to accept the invitation, and so, enroll in the event, or to ignore it. Only upcoming events show the option to invite other users. Users have the option to uninvite and to unenroll in events. After an event is successfully created, the user gets redirected to the event's show page.
-
-![Captura de Pantalla 2021-04-26 a la(s) 20 16 30](https://user-images.githubusercontent.com/68709712/116179506-5ab0af80-a6cc-11eb-89e4-e6b57bf05f89.png)
 
 
 ## Getting Started
 
 To get a local copy up and running follow these simple example steps:
+
 
 ### Prerequisites
 
@@ -23,6 +21,7 @@ To get a local copy up and running follow these simple example steps:
 * SQLite3
 * Node.js
 * Yarn
+
 
 ### Setup and Install
 
