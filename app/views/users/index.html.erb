@@ -1,43 +1,45 @@
- <div class="">
-          <h2 class="">Guest List</h2>
-    
-          <div class="">
-            <table class="">
-              <tbody>
-                <th class="">Name</th>
-                <th class="">Status</th>
-                <th class="">Action</th>
+<div class="d-flex flex-column">
+  
+  <div class="d-flex flex-row justify-content-around my-3">
+    <h2>Guest List</h2>
+  </div>
+  
+  <div class="d-flex flex-row justify-content-around">
+    <h3 class="">Name</h3>
+    <h3 class="">Status</h3>
+    <h3 class="">Action</h3>
+  </div>
 
-                <% @users.reject { |user| user == Event.find(params[:event_id]).creator }.each do |user| %>
-                  <% invitation = Invitation.find_by(event_id: params[:event_id], user_id: user.id) %>
-                  <tr>
-                    <td class="">
-                      <%= user.username %>
-                    </td>
-                    <% unless invitation.nil? || invitation.status.nil? %>
-                      <td class="">
-                        <span class=""><%= invitation.status %><span>
-                      </td>
-                    <% else %>
-                      <td></td>
-                    <% end %>
-                    <% if invitation.nil? %>
-                      <td class="">
-                        <%= button_to "Invite", invitations_path(event_id: params[:event_id], user_id: user.id), class: "button is-primary is-small" %>
-                      </td>
-                    <% else %>
-                      <td class="">
-                        <%= button_to "Cancel Invitation", invitation_path(id: invitation.id, event_id: params[:event_id]), method: :delete, class: "button is-danger is-small" %>
-                      </td>
-                    <% end %>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
+  <div class="d-flex flex-row justify-content-around">
+    <% @users.reject { |user| user == Event.find(params[:event_id]).creator }.each do |user| %>
+      <% invitation = Invitation.find_by(event_id: params[:event_id], user_id: user.id) %>
+        
+      <div class="my-4">
+        <%= user.username %>
+      </div>
 
-          <br/>
+      <div class="my-4">
+      <% unless invitation.nil? || invitation.status.nil? %>
+          <span class=""><%= invitation.status %><span>
+        <% else %>
+          <td></td>
+        <% end %>
+      </div>
 
-          <%= link_to 'Back to Event Details', event_path(id: params[:event_id]), class: "button is-fullwidth" %>
+      <div class="my-4">
+        <% if invitation.nil? %>
+          <%= button_to "Invite", invitations_path(event_id: params[:event_id], user_id: user.id), class: "button is-primary is-small" %>
+        <% else %>
+          <%= button_to "Cancel Invitation", invitation_path(id: invitation.id, event_id: params[:event_id]), method: :delete, class: "button is-danger is-small" %>
+        <% end %>
+      </div>
+      
+    <% end %>
 
-        </div>
+  </div>
+      
+  <div class="d-flex flex-row justify-content-around">
+    <%= link_to 'Back to Event Details', event_path(id: params[:event_id]), class: "button is-fullwidth" %>
+  </div>
+
+</div>

@@ -1,33 +1,40 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @event.title %>
-</p>
+<div class="d-flex flex-row justify-content-center">
+  <div class="d-flex flex-column align-items-beginning mt-3">
+  
+    <p>
+      <strong>Title:</strong>
+      <%= @event.title %>
+    </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
+    <p>
+      <strong>Description:</strong>
+      <%= @event.description %>
+    </p>
 
-<p>
-  <strong>Date:</strong>
-  <%= @event.date %>
-</p>
+    <p>
+      <strong>Date:</strong>
+      <%= @event.date %>
+    </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @event.user_id %>
-</p>
-  <% if @event.creator == current_user %>
-    <%= button_to "Invite", users_path, params: {:event_id => @event.id}, method: :get, class: "button is-info is-large is-fullwidth" %>
-  <% else %>
-    <% invitations = Invitation.find_by(event_id: @event.id, user_id: current_user.id) %>
-    <% if invitations && !invitations.accepted? %>
-      <%= button_to "Cancel enrollment", invitation_path(id: invitations.id, event_id: @event.id, user_id: current_user.id), method: :delete, class: "button is-danger is-large is-fullwidth" %>
-    <% else %>
-    <%= button_to "Enroll", invitation_path(event_id: @event.id), method: :patch, class: "button is-primary is-large is-fullwidth" %>
-    <% end %>
-  <% end %>
+    <p>
+      <strong>User:</strong>
+      <%= @event.user_id %>
+    </p>
 
-<%= link_to 'Back', events_path %>
+      <% if @event.creator == current_user %>
+        <%= button_to "Invite", users_path, params: {:event_id => @event.id}, method: :get, class: "" %>
+      <% else %>
+        <% invitations = Invitation.find_by(event_id: @event.id, user_id: current_user.id) %>
+        <% if invitations && !invitations.accepted? %>
+          <%= button_to "Cancel enrollment", invitation_path(id: invitations.id, event_id: @event.id, user_id: current_user.id), method: :delete, class: "" %>
+        <% else %>
+        <%= button_to "Enroll", invitation_path(event_id: @event.id), method: :patch, class: "" %>
+        <% end %>
+      <% end %>
+
+    <%= link_to 'Back', events_path %>
+
+  </div>
+</div>
