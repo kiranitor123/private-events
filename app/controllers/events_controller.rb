@@ -4,11 +4,16 @@ class EventsController < ApplicationController
   # GET /events or /events.json
   def index
     @events = Event.all
+    @upcoming_events = @events.upcoming.order(:start_time)
+    @past_events = @events.past.order(:start_time)
   end
 
   # GET /events/1 or /events/1.json
   def show
     @event = Event.find(params[:id])
+    if current_user
+      @reservation = @event.invitations.find_by(event_id: @event.id, invitee_id: current_user.id)
+    end
   end
 
   # GET /events/new

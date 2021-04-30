@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_04_29_153838) do
   end
 
   create_table "invitations", force: :cascade do |t|
-    t.boolean "status"
+    t.string "status", default: "no response"
     t.integer "user_id", null: false
     t.integer "event_id", null: false
     t.datetime "created_at", precision: 6, null: false
