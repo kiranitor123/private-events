@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InvitationsController < ApplicationController
   before_action :require_login, only: [:create, :update, :destroy]
   before_action :host_user, only: [:create, :update, :new]
@@ -48,6 +50,4 @@ class InvitationsController < ApplicationController
       format.json { render :partial => "invitations/show" }
     end
   end
-
-
 end
