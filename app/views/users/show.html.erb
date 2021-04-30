@@ -1,5 +1,3 @@
-<div class="d-flex flex-column align-content-center">
-    
   <div class="d-flex flex-row justify-content-center py-3">
     <h2><%= @user.username %>'s Profile</h2>
   </div>
@@ -12,36 +10,49 @@
           <p>User is not hosting</p>
         <% else %>
           <% @user.events.each do |event| %>
-            <li><%=link_to event.title, event_path(event) %></li>
+            <li>
+            <%=link_to event.title, event_path(event) %>
+            </li>
           <% end %>
         <% end %>
       </ul>
     </div>
-
     <div>
-      <h3>Upcoming Events: <%= @user.attended_events.where('date >= ?', Date.today).count %></h3>
-      <ul>
-        <% if @user.attended_events.where('date >= ?', Date.today).count.zero? %>
-          <p>No planned parties</p>
-        <% else %>
-          <% @user.attended_events.where('date >= ?', Date.today).each do |event| %>
-            <li><%=link_to event.title, event_path(event) %></li>
+      <% if yes_reservation_pending.any? %>
+        <h3>Pending Accept: <%= @user.events.count %></h3>
+        <ul>
+          <% if @user.events.empty? %>
+            <p>User is not hosting</p>
+          <% else %>
+            <% @user.events.each do |event| %>
+              <li><%=link_to event.title, event_path(event) %></li>
+            <% end %>
           <% end %>
-        <% end %>
-      </ul>
+        </ul>
+      <% end %>
     </div>
 
     <div>
-      <h3>Attended Events: <%= @user.attended_events.where('date < ?', Date.today).count %></h3>
-      <ul>
-        <% if @user.attended_events.empty? %>
-          <p>User is not partying</p>
+      <h3>Upcoming Events</h3>
+      <% yes_reservation_future.each do |rsvp| %>
+        <li class="is-capitalized">   
+          <%= link_to rsvp.event.title, rsvp.event, class: "is-size-5-desktop" %>
+        </li>
+      <% end %>
+
+    </div>
+
+    <div>
+      <h3>Attended Events </h3>
+        <% if yes_reservation_past.any?%>
+            <ul>
+              <% yes_reservation_past.each do |rsvp| %>
+                <li class="is-capitalized">
+                  <%= link_to rsvp.event.title, rsvp.event, class: "is-size-5-desktop" %>
+                </li>
+              <% end %>
+            </ul>
         <% else %>
-          <% @user.attended_events.where('date < ?', Date.today).each do |event| %>
-            <li><%=link_to event.title, event_path(event) %></li>
-          <% end %>
         <% end %>
-      </ul>
     </div>
   </div>
-</div>
