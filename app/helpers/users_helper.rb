@@ -17,4 +17,8 @@ module UsersHelper
   def yes_reservation_pending
     @user.invitations.reservation_pending.includes(:event)
   end
+
+  def find_invitation_element(event, user)
+    Invitation.find_by(event_id: event.id, user_id: current_user.id, invitee_id: user.id) 
+  end
 end

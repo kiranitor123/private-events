@@ -32,17 +32,22 @@ class InvitationsController < ApplicationController
 
   def destroy
     @invitation = Invitation.find(params[:id])
-    @event = @invitation.event
-    @invitation.destroy
+    @event = Event.find(params[:event_id])
+
+    if @invitation.user_id == current_user.id
+      @invitation.destroy
+    else
+      @invitation.update_attribute(:status, params[:status])
+    end
     respond_to do |format|
       format.html { redirect_to @event }
       format.js
       end
+    
   end
 
   def update
-    @invitation = Invitation.find(params[:id])
-    @event = @invitation.event
+    @event = Event.find(params[:event_id])
     @reservation = @event.invitations.find_by(event_id: @event.id, invitee_id: current_user.id)
     @reservation.update_attribute(:status, params[:status])
     respond_to do |format|

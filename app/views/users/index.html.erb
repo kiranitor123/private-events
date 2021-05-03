@@ -8,8 +8,7 @@
 
     <div class="d-flex flex-column justify-content-around pl-5">
       <% @users.reject { |user| user == Event.find(params[:event_id]).creator }.each do |user| %>
-        <% invitation = Invitation.find_by(event_id: params[:event_id], user_id: user.id) %>
-          
+
         <div class="pt-3">
           <h5 class="">Name</h5>
           <%= user.username %>
@@ -17,8 +16,9 @@
 
         <div class="pt-3">
           <h5 class="">Status</h5>
-          <% unless invitation.nil? || invitation.status.nil? %>
-              <span class=""><%= invitation.status %><span>
+
+          <% unless find_invitation_element(@event, user).nil? %>
+              <span class=""><%= find_invitation_element(@event, user).status %><span>
             <% else %>
               ***
             <% end %>
@@ -26,13 +26,13 @@
 
         <div class="pt-3 border-bottom">
           <h5 class="">Action</h5>
-            <% if invitation.nil? %>
+          <% if find_invitation_element(@event, user).nil? %>
               <%= button_to "Invite", invitations_path(event_id: params[:event_id], user_id: user.id), class: "btn-success px-4 mb-4" %>
             <% else %>
-              <%= button_to "Cancel Invitation", invitation_path(id: invitation.id, event_id: params[:event_id]), method: :delete, class: "btn-danger px-4 mb-4" %>
+              <%= button_to "Cancel Invitation", invitation_path(id: find_invitation_element(@event, user).id,event_id: @event.id, user_id: user.id,  status: 'cancelled'), method: :delete, class: ""  %>
             <% end %>
         </div>
-      <% end %>
+        <% end %>
    
         <div class="pt-4">
           <%= link_to 'Back to Event Details', event_path(id: params[:event_id]), class: "button is-fullwidth" %>

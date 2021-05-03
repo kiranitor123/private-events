@@ -13,6 +13,7 @@ class EventsController < ApplicationController
   # GET /events/1 or /events/1.json
   def show
     @event = Event.find(params[:id])
+
     if current_user
       @reservation = @event.invitations.find_by(event_id: @event.id, user_id: current_user.id)
     end
