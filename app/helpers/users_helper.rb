@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module UsersHelper
-  private
 
   def find_invitation(event)
     event.invitations.find_by(invitee_id: @user.id)

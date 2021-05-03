@@ -3,20 +3,23 @@
 <h3 class="">Upcoming Events</h3>
 
  <% @upcoming_events.order(:date).each do |event| %>
-  <%= link_to event.title, event %>
+ <div>
+  <%=event.title %>
   <%=event.description %>
   Starts in <%= event.date %>
   <% if current_user %>
-    <% if current_user.invited_events.include?(event) %>
+    <% if future_non_hosted_event?(event) %>
       <li class="">
         <%= link_to "Reservation", event, class: "" %>
       </li>
-    <% else %>
-    <li class="">
-      <%= link_to "Details", event, class: "" %>
-    </li>
+    <% end %>
+    <% if current_user_is_host?(event) %>
+      <li class="">
+        <%= link_to "Detail", event, class: "" %>
+      </li>
     <% end %>
   <% end %>
+  </div>
 <% end %>
 
 <h3 class="">Past Events</h3>
