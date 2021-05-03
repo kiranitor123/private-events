@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<h3 class="">Upcoming Events</h3>
+<div class="d-flex flex-row justify-content-center">
+  
+  <div class="d-flex flex-column col-4 mt-3">
+    <h3 class="">Upcoming Events</h3>
 
  <% @upcoming_events.order(:date).each do |event| %>
  <div>
@@ -19,12 +22,20 @@
       </li>
     <% end %>
   <% end %>
-  </div>
+</div>
 <% end %>
 
-<h3 class="">Past Events</h3>
-<% @past_events.order(:date).limit(50).each do |event| %>
-  <li class="">
-    <%= link_to event.title, event, class: "" %>
-  </li>
-<% end %>
+  <div class="d-flex flex-column col-4 mt-3">
+    <h3>Past Events</h3>
+    
+    <% @past_events.order(:date).limit(50).each do |event| %>
+      <div class="py-3">
+        <%= link_to event.title, event, class: "" %>
+      </div>
+      <div class="pb-3 border-bottom">
+      Took place <%= event.date %>
+      </div>
+    <% end %>
+  </div>
+
+</div>
