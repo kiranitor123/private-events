@@ -23,18 +23,22 @@
       <%= @event.creator.username %>
     </p>
 
+    <div class="pt-3">
       <% if current_user_is_host?(@event) %>
-        <%= button_to "Invite", users_path, params: {:event_id => @event.id}, method: :get, class: "" %>
+        <%= button_to "Invite", users_path, params: {:event_id => @event.id}, method: :get, class: "btn-success px-5" %>
       <% else %>
         <% invitations = Invitation.find_by(event_id: @event.id, invitee: current_user.id) %>
         <% if invitations && accepted?(invitations) %>
-          <%= button_to "Cancel enrollment", invitation_path(id: invitations.id, event_id: @event.id, user_id: current_user.id,  status: 'cancelled'), method: :delete, class: "" %>
+          <%= button_to "Cancel enrollment", invitation_path(id: invitations.id, event_id: @event.id, user_id: current_user.id,  status: 'cancelled'), method: :delete, class: "btn-danger px-5" %>
         <% else %>
-        <%= button_to "Enroll", invitation_path(event_id: @event.id, status: 'approved'), method: :patch, class: "" %>
+        <%= button_to "Enroll", invitation_path(event_id: @event.id, status: 'approved'), method: :patch, class: "btn-success px-5" %>
         <% end %>
       <% end %>
-
-    <%= link_to 'Back', events_path %>
+    </div>
+    
+    <div class="pt-3">
+      <%= link_to 'Back', events_path %>
+    </div>
 
   </div>
 </div>
