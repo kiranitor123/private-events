@@ -25,7 +25,6 @@ class InvitationsController < ApplicationController
       format.html { redirect_to event }
       format.js
     end
-
   end
 
   def destroy
