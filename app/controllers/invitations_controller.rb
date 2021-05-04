@@ -25,6 +25,11 @@ class InvitationsController < ApplicationController
         format.html { redirect_to event }
         format.js
       end
+    else
+      respond_to do |format|
+        format.html { redirect_to event }
+        format.js
+      end
     end
   end
 
