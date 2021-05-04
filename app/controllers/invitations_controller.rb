@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class InvitationsController < ApplicationController
   before_action :require_login, only: %i[create update destroy]
   before_action :host_user, only: %i[create update new]

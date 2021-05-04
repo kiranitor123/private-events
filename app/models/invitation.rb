@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Invitation < ApplicationRecord
   belongs_to :user, class_name: 'User'
   belongs_to :event
