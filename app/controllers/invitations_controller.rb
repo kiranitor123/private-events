@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 class InvitationsController < ApplicationController
-  before_action :require_login, only: [:create, :update, :destroy]
-  before_action :host_user, only: [:create, :update, :new]
+  before_action :require_login, only: %i[create update destroy]
+  before_action :host_user, only: %i[create update new]
 
   def show
     @invitation = Event.find(params[:id])
-    
+
     respond_to do |format|
-      flash[:info] = "You have been redirected. Invitations managed on event pages."
+      flash[:info] = 'You have been redirected. Invitations managed on event pages.'
       format.html { redirect_to root_url }
     end
   end
@@ -42,8 +42,7 @@ class InvitationsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to @event }
       format.js
-      end
-    
+    end
   end
 
   def update
@@ -53,13 +52,13 @@ class InvitationsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to @event }
       format.js
-      format.json { render :partial => "invitations/show" }
+      format.json { render partial: 'invitations/show' }
     end
   end
 
   private
 
-    def invitation_params
-      params.require(:invitation).permit(:event_id, :user_id, :status)
-    end
+  def invitation_params
+    params.require(:invitation).permit(:event_id, :user_id, :status)
+  end
 end

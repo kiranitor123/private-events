@@ -8,9 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def host_user
-    if !current_user == @user
-      redirect_to root_url
-    end
+    redirect_to root_url if !current_user == @user
   end
 
   def current_user

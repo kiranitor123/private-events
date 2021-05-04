@@ -44,14 +44,27 @@
 </div>
 
 <div class="d-flex flex-row justify-content-center mt-5">
-  <div class="d-flex flex-column col-4">
-    <h4>Invites</h4>
-    
+  <div class="d-flex flex-column col-3 border">
+    <h4 class="pl-5">Invites</h4>
     <ul class="list-group">
       <% @invites.each do |invitation| %>
         <li class="list-group-item"><%= invitation.invitee.username %></li>
       <% end %>
     </ul>
+  </div>
+
+  <div class="d-flex flex-column col-3 border">
+    <h4 class="pl-5">Attendees</h4>
+    <ul class="list-group">
+      <% @attending.each do |invitation| %>
+        <li class="list-group-item"><%=  invitation.invitee.username %></li>
+      <% end %>
+    </ul>
+  </div>
+
+
+  <div class="d-flex flex-column col-3 border">
+    <h4 class="pl-5">Canceled</h4>
     <ul class="list-group">
       <% @cancelled.each do |invitation| %>
         <li class="list-group-item"><%= invitation.invitee.username %></li>
@@ -59,12 +72,4 @@
     </ul>
   </div>
 
-  <div class="d-flex flex-column col-4">
-    <h4>Attendees</h4>
-    <ul class="list-group">
-      <% @attending.each do |invitation| %>
-        <li class="list-group-item"><%=  invitation.invitee.username %></li>
-      <% end %>
-    </ul>
-  </div>
 </div>
