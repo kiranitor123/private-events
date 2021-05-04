@@ -15,8 +15,14 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     if current_user
-      @reservation = @event.invitations.find_by(event_id: @event.id, user_id: current_user.id)
+      @reservation = @event.invitations.find_by(event_id: @event.id, invitee_id: current_user.id)
     end
+
+    @invites = @event.invitations.where(status: 'no response')
+    @cancelled = @event.invitations.where(status: 'cancelled')
+    @attending = @event.invitations.where(status: 'approved')
+
+    byebug
   end
 
   # GET /events/new

@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @users_show = @users.reject { |user| user == Event.find(params[:event_id]).creator }
     @invitation = Invitation.find_by(event_id: params[:event_id], user_id: current_user.id) 
     @event = Event.find(params[:event_id])
   end
