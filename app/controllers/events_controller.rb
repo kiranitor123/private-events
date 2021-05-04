@@ -21,8 +21,6 @@ class EventsController < ApplicationController
     @invites = @event.invitations.where(status: 'no response')
     @cancelled = @event.invitations.where(status: 'cancelled')
     @attending = @event.invitations.where(status: 'approved')
-
-    byebug
   end
 
   # GET /events/new
